@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+service RaftNode {
+  rpc ServeClient (ClientRequest) returns (ClientResponse) {}
+  rpc ServeVoteRequest (VoteRequest) returns (VoteResponse) {}
+  rpc ServeLogRequest (LogRequest) returns (LogResponse) {}
+}
+
+message ClientRequest {
+  string Request = 1;
+}
+
+message ClientResponse {
+  string Data = 1;
+  string LeaderID = 2;
+  bool Success = 3;
+}
+
+message VoteRequest {
+  string NodeID = 1;
+  int32 Term = 2;
+  int32 LastLogIndex = 3;
+  int32 LastLogTerm = 4;
+}
+
+message VoteResponse {
+  string NodeID = 1;
+  int32 Term = 2;
+  bool Vote = 3;
+  int32 LeaseEnd = 4;
+}
+
+message LogEntry {
+  int32 Term = 1;
+  string Command = 2;
+}
+
+message LogRequest {
+  string LeaderID = 1;
+  int32 Term = 2;
+  int32 PrefixLength = 3;
+  int32 PrefixTerm = 4;
+  int32 CommitLength = 5;
+  repeated LogEntry LogEntries = 6;
+  int32 LeaseEnd = 7;
+}
+
+message LogResponse {
+  string NodeID = 1;
+  int32 Term = 2;
+  int32 Ack = 3;
+  bool Response = 4;
+}
