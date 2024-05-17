@@ -10,7 +10,7 @@ This project implements a modified version of the Raft consensus algorithm with 
 ### Installation
 Clone the repository
 ```bash
-git clone https://github.com/utkar22/DSCD-A2-G1.git
+git clone https://github.com/sahilgoswami0901/Raft-Consensus-Algorithm.git
 ```
 
 ```bash
